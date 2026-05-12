@@ -1,7 +1,8 @@
 ﻿using CSharpEducation.TicTacToe.Models;
 using CSharpEducation.TicTacToe.Presentation;
 
-ConsoleKey pressedKey;
+MoveResult resultMove;
+ConsoleKey selectedPlayer;
 Player currentPlayer;
 Game game = new();
 
@@ -9,14 +10,14 @@ StartMessageRender.Render();
 
 do
 {
-    pressedKey = Console.ReadKey(true).Key;
-    currentPlayer = pressedKey == ConsoleKey.X ? Player.X : Player.O;
+    selectedPlayer = Console.ReadKey(true).Key;
 
-} while (pressedKey != ConsoleKey.X && pressedKey != ConsoleKey.O);
+} while (selectedPlayer != ConsoleKey.X && selectedPlayer != ConsoleKey.O);
+currentPlayer = selectedPlayer == ConsoleKey.X ? Player.X : Player.O;
 
-Console.WriteLine($"Первым ходит: {pressedKey}");
+Console.WriteLine($"Первым ходит: {currentPlayer}");
+
 GameBoardRender.Render(game.BoardCells());
-MoveResult resultMove;
 do
 {
     Console.Write($"Ходит {currentPlayer}: ");
@@ -40,5 +41,6 @@ do
     currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
     GameBoardRender.Render(game.BoardCells());
 } while (resultMove != MoveResult.GameOver);
+
 Console.WriteLine("Игра окончена. Нажмите любую клавишу для выхода.");
 Console.ReadKey();
