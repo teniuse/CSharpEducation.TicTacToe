@@ -3,6 +3,6 @@
 public enum Player
 {
     Empty = 0,
-    X,
+    X, 
     O
 }
