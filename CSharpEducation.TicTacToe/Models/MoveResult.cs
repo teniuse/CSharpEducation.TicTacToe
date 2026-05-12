@@ -1,6 +1,6 @@
 ﻿namespace CSharpEducation.TicTacToe.Models;
 
-internal enum MoveResult
+public enum MoveResult
 {
     /// <summary>Успешный ход</summary>
     Success,

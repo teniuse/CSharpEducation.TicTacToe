@@ -1,10 +1,9 @@
-﻿using CSharpEducation.TicTacToe.Abstract;
-using CSharpEducation.TicTacToe.Models;
+﻿using CSharpEducation.TicTacToe.Models;
 using CSharpEducation.TicTacToe.Presentation;
 
 ConsoleKey pressedKey;
 bool currentPlayer;
-GameField gameField = new();
+Game game = new();
 GameFieldRender fieldRender = new();
 
 Console.ForegroundColor = ConsoleColor.Green;
@@ -21,8 +20,8 @@ do
 } while (pressedKey != ConsoleKey.X && pressedKey != ConsoleKey.O);
 
 Console.WriteLine($"Первым ходит: {pressedKey}");
-fieldRender.Render(gameField.Cells);
-
+fieldRender.Render(game.BoardCells());
+MoveResult resultMove;
 do
 {
     var cheyHod = currentPlayer == true ? Player.X : Player.O;
@@ -37,7 +36,7 @@ do
 
     Console.WriteLine();
     number = ch - '0';
-    var resultMove = gameField.TryMove(number, currentPlayer);
+    resultMove = game.TryMove(number, currentPlayer);
 
     if (resultMove == MoveResult.CellOccupied)
     {
@@ -45,7 +44,7 @@ do
         continue;
     }
     currentPlayer = !currentPlayer;
-    fieldRender.Render(gameField.Cells);
-} while (!gameField.CheckWin());
+    fieldRender.Render(game.BoardCells());
+} while (resultMove != MoveResult.GameOver);
 Console.WriteLine("Игра окончена. Нажмите любую клавишу для выхода.");
 Console.ReadKey();
