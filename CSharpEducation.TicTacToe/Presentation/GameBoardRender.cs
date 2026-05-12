@@ -1,8 +1,8 @@
 ﻿namespace CSharpEducation.TicTacToe.Presentation;
 
-internal sealed class GameFieldRender
+internal static class GameBoardRender
 {
-    public void Render(ReadOnlySpan<bool?> cells)
+    public static void Render(ReadOnlySpan<bool?> cells)
     {
         Console.WriteLine($"-------------");
         Console.WriteLine($"| {RenderFieldCell(cells, 0)} | {RenderFieldCell(cells, 1)} | {RenderFieldCell(cells, 2)} |");

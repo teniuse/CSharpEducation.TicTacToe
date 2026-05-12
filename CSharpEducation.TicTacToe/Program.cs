@@ -4,13 +4,8 @@ using CSharpEducation.TicTacToe.Presentation;
 ConsoleKey pressedKey;
 bool currentPlayer;
 Game game = new();
-GameFieldRender fieldRender = new();
 
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("Добро пожаловать в игру крестики-нолики!");
-Console.ForegroundColor = ConsoleColor.Yellow;
-Console.WriteLine("Выберите кто будет ходить первым: X и O");
-Console.ResetColor();
+StartMessageRender.Render();
 
 do
 {
@@ -20,7 +15,7 @@ do
 } while (pressedKey != ConsoleKey.X && pressedKey != ConsoleKey.O);
 
 Console.WriteLine($"Первым ходит: {pressedKey}");
-fieldRender.Render(game.BoardCells());
+GameBoardRender.Render(game.BoardCells());
 MoveResult resultMove;
 do
 {
@@ -44,7 +39,7 @@ do
         continue;
     }
     currentPlayer = !currentPlayer;
-    fieldRender.Render(game.BoardCells());
+    GameBoardRender.Render(game.BoardCells());
 } while (resultMove != MoveResult.GameOver);
 Console.WriteLine("Игра окончена. Нажмите любую клавишу для выхода.");
 Console.ReadKey();
