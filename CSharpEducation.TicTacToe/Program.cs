@@ -2,7 +2,7 @@
 using CSharpEducation.TicTacToe.Presentation;
 
 ConsoleKey pressedKey;
-bool currentPlayer;
+Player currentPlayer;
 Game game = new();
 
 StartMessageRender.Render();
@@ -10,7 +10,7 @@ StartMessageRender.Render();
 do
 {
     pressedKey = Console.ReadKey(true).Key;
-    currentPlayer = pressedKey == ConsoleKey.X ? true : false;
+    currentPlayer = pressedKey == ConsoleKey.X ? Player.X : Player.O;
 
 } while (pressedKey != ConsoleKey.X && pressedKey != ConsoleKey.O);
 
@@ -19,8 +19,7 @@ GameBoardRender.Render(game.BoardCells());
 MoveResult resultMove;
 do
 {
-    var cheyHod = currentPlayer == true ? Player.X : Player.O;
-    Console.Write($"Ходит {cheyHod}: ");
+    Console.Write($"Ходит {currentPlayer}: ");
     char ch;
     int number;
     do
@@ -38,7 +37,7 @@ do
         Console.WriteLine("Клетка занята. Повторите попытку.");
         continue;
     }
-    currentPlayer = !currentPlayer;
+    currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
     GameBoardRender.Render(game.BoardCells());
 } while (resultMove != MoveResult.GameOver);
 Console.WriteLine("Игра окончена. Нажмите любую клавишу для выхода.");

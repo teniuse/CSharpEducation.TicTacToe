@@ -7,11 +7,11 @@ public sealed partial class Game
     {
         private const int Size = 3;
         public const int CellsCount = Size * Size;
-        private readonly bool?[] board = new bool?[CellsCount];
+        private readonly Player?[] board = new Player?[CellsCount];
 
         /// <summary>Получить состояние поля</summary>
-        public ReadOnlySpan<bool?> Cells => board;
+        public ReadOnlySpan<Player?> Cells => board;
 
-        public void SetCell(int index, bool player) => board[index] = player;
+        public void SetCell(int index, Player player) => board[index] = player;
     }
 }

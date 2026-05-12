@@ -1,8 +1,10 @@
-﻿namespace CSharpEducation.TicTacToe.Presentation;
+﻿using CSharpEducation.TicTacToe.Models;
+
+namespace CSharpEducation.TicTacToe.Presentation;
 
 internal static class GameBoardRender
 {
-    public static void Render(ReadOnlySpan<bool?> cells)
+    public static void Render(ReadOnlySpan<Player?> cells)
     {
         Console.WriteLine($"-------------");
         Console.WriteLine($"| {RenderFieldCell(cells, 0)} | {RenderFieldCell(cells, 1)} | {RenderFieldCell(cells, 2)} |");
@@ -13,11 +15,11 @@ internal static class GameBoardRender
         Console.WriteLine($"-------------");
     }
 
-    private static string RenderFieldCell(ReadOnlySpan<bool?> cells, int indexCell)
+    private static string RenderFieldCell(ReadOnlySpan<Player?> cells, int indexCell)
     {
-        if (cells[indexCell] == true)
+        if (cells[indexCell] == Player.X)
             return "\u001b[41;30mX\u001b[0m";
-        if (cells[indexCell] == false)
+        if (cells[indexCell] == Player.O)
             return "\u001b[43;30mO\u001b[0m";
         return (indexCell + 1).ToString();
     }

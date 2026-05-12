@@ -5,7 +5,7 @@ public sealed partial class Game
 {
     private readonly Board board = new();
 
-    public ReadOnlySpan<bool?> BoardCells()
+    public ReadOnlySpan<Player?> BoardCells()
     {
         return board.Cells;
     }
@@ -37,7 +37,7 @@ public sealed partial class Game
         return false;
     }
 
-    public MoveResult TryMove(int cellNumber, bool player)
+    public MoveResult TryMove(int cellNumber, Player player)
     {
         if (cellNumber < 1 || cellNumber > Board.CellsCount)
             return MoveResult.OutOfRange;
@@ -55,7 +55,7 @@ public sealed partial class Game
         return MoveResult.Success;
     }
 
-    private static bool IsFull(ReadOnlySpan<bool?> span)
+    private static bool IsFull(ReadOnlySpan<Player?> span)
     {
         for (int i = 0; i < span.Length; i++)
         {
